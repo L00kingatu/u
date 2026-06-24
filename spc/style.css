@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,400&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: linear-gradient(-45deg, #ffc0cb, #ffb6c1, #ffe4e1, #ff8da1, #f4c2c2);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease infinite;
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    color: #4a4a4a;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.cover-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 240, 245, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.envelope {
+    text-align: center;
+    cursor: pointer;
+    padding: 40px 30px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 24px;
+    box-shadow: 0 15px 35px rgba(255, 182, 193, 0.2);
+    border: 1px solid rgba(255, 192, 203, 0.5);
+    transition: transform 0.4s ease;
+}
+
+.envelope:hover { 
+    transform: scale(1.05); 
+}
+
+.heart {
+    font-size: 45px;
+    animation: pulse 1.5s infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+.cover-text { 
+    font-size: 14px; 
+    color: #8b5a6c; 
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.83);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    max-width: 400px;
+    width: 90%;
+    padding: 40px 30px;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(255, 105, 180, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+    margin: 20px auto;
+}
+
+.container.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hidden { 
+    display: none !important; 
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    color: #ff69b4;
+    font-size: 30px;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(255, 182, 193, 0.5);
+}
+
+/* Bingkai Foto Melayang */
+.photo-frame {
+    width: 190px;
+    height: 190px;
+    margin: 25px auto;
+    border-radius: 50%;
+    padding: 5px;
+    background: linear-gradient(45deg, #ff69b4, #ffb6c1);
+    box-shadow: 0 10px 25px rgba(255, 105, 180, 0.4);
+    animation: floatAnimation 4s ease-in-out infinite;
+}
+
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid white;
+}
+
+@keyframes floatAnimation {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+p.message {
+    font-size: 13.5px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    text-align: justify;
+    text-align-last: center;
+    color: #5d4d54;
+}
+
+.decorations {
+    font-size: 26px;
+    margin-bottom: 10px;
+    letter-spacing: 6px;
+}
+
+.music-box {
+    margin-top: 25px;
+    background: rgba(255, 192, 203, 0.3);
+    padding: 12px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 182, 193, 0.5);
+}
+
+.song-title {
+    font-size: 12px;
+    color: #c71585;
+    font-weight: 600;
+    animation: blinkEffect 2.5s infinite;
+}
+
+@keyframes blinkEffect {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
