@@ -1,182 +1,1132 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For The Prettiest 🌸</title>
+    <title>To The Prettiest Girl I Know 🌸</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="A special birthday gift space created with love, featuring memories, music, and sweet surprises.">
+    <meta name="keywords" content="birthday gift, love letter, polaroid gallery, scratch card, special gift">
+    
+    <!-- Google Fonts & Tailwind CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Sacramento&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        romantic: {
+                            50: '#fff5f7',
+                            100: '#ffe3e8',
+                            200: '#ffcad4',
+                            300: '#ff8fa3',
+                            400: '#ff6b81',
+                            500: '#ff4757',
+                            600: '#e11d48',
+                            800: '#be123c',
+                            900: '#881337',
+                        },
+                        ivory: {
+                            50: '#fdfdfc',
+                            100: '#faf9f6',
+                            200: '#f4f1ea',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Poppins', 'sans-serif'],
+                        cursive: ['Sacramento', 'cursive'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 15s linear infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .glassmorphism {
+                @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-xl;
+            }
+            .text-glow {
+                text-shadow: 0 0 15px rgba(255, 107, 129, 0.4);
+            }
+        }
+    </style>
+
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f1a8c0;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow-x: hidden;
+        /* CSS Animations and Custom Component Styling */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+        
+        .floating-card {
+            animation: float 6s ease-in-out infinite;
         }
 
-        .heart {
-            position: fixed;
-            top: -10px;
-            color: #ff6b81;
-            font-size: 20px;
-            user-select: none;
-            z-index: -1;
-            animation: fall linear forwards;
+        /* Envelope Styles */
+        .envelope-wrapper {
+            perspective: 1000px;
         }
-
-        @keyframes fall {
-            to { transform: translateY(100vh); }
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.9);
-            max-width: 400px;
-            padding: 40px 30px;
-            border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(255, 182, 193, 0.4);
-            border: 2px solid #ffcad4;
-            text-align: center;
+        .envelope {
             position: relative;
+            background: #ffcad4;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: transform 0.5s ease;
+            transform-style: preserve-3d;
+        }
+        .envelope .flap {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 0;
+            border-left: 175px solid transparent;
+            border-right: 175px solid transparent;
+            border-top: 110px solid #ffcad4;
+            transform-origin: top;
+            transition: transform 0.6s ease 0.2s, z-index 0.2s ease 0.4s;
+            z-index: 4;
+        }
+        .envelope.open .flap {
+            transform: rotateX(180deg);
             z-index: 1;
         }
-
-        h1 {
-            color: #ff6b81;
-            font-size: 26px;
-            margin-bottom: 20px;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        .envelope .pocket {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 120px;
+            background: #ffe3e8;
+            border-radius: 0 0 12px 12px;
+            border-top: 2px solid rgba(255,255,255,0.4);
+            z-index: 3;
+        }
+        .envelope .letter {
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+            right: 20px;
+            height: 180px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.6s;
+            z-index: 2;
+            transform: translateY(0);
+        }
+        .envelope.open .letter {
+            transform: translateY(-130px) scale(1.05);
+            z-index: 5;
         }
 
-        .pesan {
-            color: #666;
-            line-height: 1.8;
-            font-size: 15px;
-            margin-bottom: 25px;
-            text-align: center;
-            font-style: italic;
+        /* Particle Canvas */
+        #particle-canvas {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 10;
         }
 
-        .foto-utama {
-            width: 100%;
-            max-width: 280px;
-            height: auto;
-            border: 8px solid white;
-            outline: 2px solid #ffb6c1;
-            border-radius: 20px;
-            margin-bottom: 20px;
-            transition: transform 0.3s ease;
+        /* Polaroid Photo Tilts */
+        .polaroid {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 25px rgba(255, 182, 193, 0.3);
+        }
+        .polaroid:hover {
+            transform: scale(1.08) rotate(0deg) !important;
+            box-shadow: 0 20px 35px rgba(255, 107, 129, 0.4);
+            z-index: 20;
         }
 
-        .foto-utama:hover {
-            transform: scale(1.05) rotate(2deg);
-        }
-
-        .gif-pemanis {
-            width: 100px;
-            margin: 10px 0;
-        }
-
-        .music-box {
-            background: #fff5f7;
-            padding: 10px;
-            border-radius: 50px;
-            margin-top: 20px;
-            border: 1px dashed #ff6b81;
-        }
-
-        .footer {
-            font-size: 13px;
-            color: #ff8fa3;
-            margin-top: 20px;
-            font-weight: bold;
-        }
-
-        .play-btn {
-            background: #ff6b81;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: 0.3s;
-        }
-
-        .play-btn:hover {
+        /* Audio Progress Bar Styling */
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
             background: #ff4757;
-            transform: translateY(-2px);
+            cursor: pointer;
+            transition: transform 0.1s ease;
+        }
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.3);
+        }
+
+        /* Typed cursor style */
+        .typed-cursor {
+            opacity: 1;
+            animation: blink 0.7s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
     </style>
 </head>
-<body>
+<body class="bg-romantic-50 font-sans text-slate-800 overflow-x-hidden min-h-screen relative selection:bg-romantic-200">
 
-    <div class="card">
-        <h1>To The Prettiest Girl I Know 🩷</h1>
+    <!-- Background Particle Canvas (Always Active post-unlock) -->
+    <canvas id="particle-canvas"></canvas>
 
-        <img src="Lovelle.jpeg" alt="Sunshine" class="foto-utama">
-
-        <div class="pesan">
-            "Heyhoo, kamu itu sempurna, cantik, dan lucu banget! <br>
-            Jangan pernah ngerasa kurang ya sayang, karena di mata aku dan orang-orang yang sayang kamu, kamu itu paket lengkap. <br>
-            Stay happy, I always supporting you! ✨"
+    <!-- LOCK SCREEN OVERLAY -->
+    <div id="root-lock-screen" class="fixed inset-0 bg-gradient-to-tr from-romantic-100 via-rose-50 to-romantic-200 z-55 flex flex-col items-center justify-center transition-all duration-1000 px-4 hidden">
+        <div class="bg-white/80 backdrop-blur-md border border-white/20 shadow-xl max-w-md w-full p-8 rounded-3xl text-center flex flex-col items-center gap-6">
+            <div class="text-4xl animate-pulse">🔒✨</div>
+            <h2 class="font-serif text-2xl text-romantic-500 font-bold">Tunggu Sebentar, Ya... 🌸</h2>
+            <p class="text-slate-500 text-sm">Hadiah spesialmu sedang dipersiapkan dan baru bisa dibuka saat hari ulang tahunmu tiba! 🥰</p>
+            
+            <!-- Countdown grid -->
+            <div class="grid grid-cols-4 gap-3 w-full">
+                <div class="bg-white/90 border border-romantic-100 rounded-xl p-3 text-center shadow-sm">
+                    <span id="lock-days" class="text-xl font-bold text-romantic-500 block">00</span>
+                    <span class="text-[9px] font-semibold text-slate-400 uppercase tracking-widest">Hari</span>
+                </div>
+                <div class="bg-white/90 border border-romantic-100 rounded-xl p-3 text-center shadow-sm">
+                    <span id="lock-hours" class="text-xl font-bold text-romantic-500 block">00</span>
+                    <span class="text-[9px] font-semibold text-slate-400 uppercase tracking-widest">Jam</span>
+                </div>
+                <div class="bg-white/90 border border-romantic-100 rounded-xl p-3 text-center shadow-sm">
+                    <span id="lock-minutes" class="text-xl font-bold text-romantic-500 block">00</span>
+                    <span class="text-[9px] font-semibold text-slate-400 uppercase tracking-widest">Menit</span>
+                </div>
+                <div class="bg-white/90 border border-romantic-100 rounded-xl p-3 text-center shadow-sm">
+                    <span id="lock-seconds" class="text-xl font-bold text-romantic-500 block">00</span>
+                    <span class="text-[9px] font-semibold text-slate-400 uppercase tracking-widest">Detik</span>
+                </div>
+            </div>
+            
+            <p class="text-xs text-romantic-500 font-semibold bg-romantic-100/50 px-4 py-2 rounded-full">
+                <i class="fa-solid fa-calendar-days mr-1"></i> Membuka pada: <span id="lock-target-date-display">...</span>
+            </p>
         </div>
-
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTAzejBsa2RraW1nYm1wanJ5ZDZkanBvNzRoYjRmbzRvODhic3NmdCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/26FLdmIp6wJr91JAI/200.webp" alt="Tunggu" class="gif-pemanis" width="300">
-        
-        <div class="music-box">
-            <div id="player" style="display:none;"></div>
-            <p style="font-size: 0.7rem; color: #ff8fa3; margin-bottom: 5px;">Listen to this for you ✨</p>
-            <button class="play-btn" onclick="playMusic()">Klik untuk Musik 🎵</button>
-        </div>
-
-        <p class="footer">Made with love by Arif</p>
     </div>
 
-    <script>
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    <!-- LANDING GATE (The Envelope) -->
+    <div id="gate" class="fixed inset-0 bg-gradient-to-tr from-romantic-100 via-rose-50 to-romantic-200 z-50 flex flex-col items-center justify-center transition-all duration-1000 px-4">
+        
+        <div class="text-center mb-8 animate-fade-in">
+            <h2 class="font-serif text-3xl md:text-4xl text-romantic-500 font-bold mb-2">You Have A Delivery! 📦</h2>
+            <p class="text-slate-500 text-sm font-medium">Ada sebuah pesan manis yang menunggumu...</p>
+        </div>
 
-        var player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '0',
-                width: '0',
-                videoId: 'gVuOUSKe-A4',                  playerVars: {
-                    'autoplay': 0,
-                    'loop': 1,
-                    'playlist': 'gVuOUSKe-A4'
-                }
+        <!-- 3D Envelope Container -->
+        <div class="envelope-wrapper flex items-center justify-center w-full max-w-[350px] h-[300px]">
+            <div id="main-envelope" class="envelope w-[350px] h-[220px] rounded-b-xl cursor-pointer" onclick="openGift()">
+                <!-- Front Flap -->
+                <div class="flap"></div>
+                <!-- Inner Letter Card -->
+                <div class="letter flex flex-col justify-between items-center text-center">
+                    <p class="font-cursive text-3xl text-romantic-500 font-bold mt-2">Untuk Cantik... 🌸</p>
+                    <p class="text-xs text-slate-500 px-2 line-clamp-3 font-serif italic">"I created this little space just to tell you how amazing you are."</p>
+                    <button class="bg-romantic-400 text-white font-medium text-xs px-4 py-2 rounded-full shadow hover:bg-romantic-500 transition duration-300">
+                        Masuk Ruang Rahasia ✨
+                    </button>
+                </div>
+                <!-- Pocket -->
+                <div class="pocket"></div>
+                <!-- Red Wax Heart Seal -->
+                <div id="wax-seal" class="absolute top-[85px] left-[150px] w-12 h-12 bg-romantic-500 rounded-full flex items-center justify-center text-white text-lg shadow-lg z-10 transition-transform duration-300 hover:scale-110 active:scale-95">
+                    <i class="fa-solid fa-heart animate-pulse"></i>
+                </div>
+            </div>
+        </div>
+
+        <p class="mt-8 text-xs text-romantic-400 font-semibold animate-pulse-slow">
+            <i class="fa-solid fa-hand-pointer mr-1"></i> Klik amplop di atas untuk membuka kado
+        </p>
+    </div>
+
+    <!-- MAIN APP CONTENT (Initially hidden and blurred) -->
+    <div id="app-content" class="hidden opacity-0 blur-md transition-all duration-1000">
+
+        <!-- HEADER SECTION -->
+        <header class="relative min-h-[90vh] flex flex-col items-center justify-center px-4 overflow-hidden">
+            <!-- Decorative Background Blobs -->
+            <div class="absolute top-20 left-10 w-48 h-48 bg-romantic-200/40 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 right-10 w-64 h-64 bg-romantic-300/30 rounded-full blur-3xl"></div>
+
+            <div class="z-10 text-center max-w-2xl px-4 flex flex-col items-center">
+                <!-- Lovelle Polaroid/Avatar Frame in Hero -->
+                <div class="mb-8 relative floating-card">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-romantic-300 to-pink-400 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                    <div class="relative bg-white p-3 pb-8 rounded-xl shadow-2xl border border-romantic-100 rotate-[-3deg]">
+                        <img id="hero-img" src="Lovelle.jpeg" alt="Lovelle" class="w-48 h-48 md:w-56 md:h-56 object-cover rounded-lg shadow-inner">
+                        <p class="font-cursive text-3xl text-romantic-500 text-center mt-3 mb-[-10px]">The Sunshine ☀️</p>
+                    </div>
+                </div>
+
+                <h1 class="font-serif text-4xl md:text-6xl text-romantic-500 font-extrabold tracking-tight mb-4 text-glow">
+                    To The Prettiest Girl I Know...
+                </h1>
+
+                <!-- Typing effect container -->
+                <div class="min-h-[60px] md:min-h-[80px] flex items-center justify-center px-4">
+                    <p id="typing-text" class="font-serif text-lg md:text-xl text-slate-600 italic font-medium max-w-xl text-center leading-relaxed"></p>
+                    <span class="typed-cursor text-romantic-500 text-2xl font-bold ml-1">|</span>
+                </div>
+
+                <div class="mt-8 flex gap-4">
+                    <a href="#countdown" class="bg-white/80 hover:bg-white text-romantic-500 font-semibold px-5 py-2.5 rounded-full shadow-md border border-romantic-100 hover:border-romantic-300 transition duration-300 flex items-center gap-2 text-sm">
+                        <i class="fa-solid fa-clock"></i> Countdown
+                    </a>
+                    <a href="#gallery" class="bg-romantic-400 hover:bg-romantic-500 text-white font-semibold px-5 py-2.5 rounded-full shadow-md shadow-romantic-200/50 transition duration-300 flex items-center gap-2 text-sm">
+                        <i class="fa-solid fa-images"></i> Galeri Foto
+                    </a>
+                    <a href="#letter" class="bg-white/80 hover:bg-white text-romantic-500 font-semibold px-5 py-2.5 rounded-full shadow-md border border-romantic-100 hover:border-romantic-300 transition duration-300 flex items-center gap-2 text-sm">
+                        <i class="fa-solid fa-envelope-open-text"></i> Pesan Rahasia
+                    </a>
+                </div>
+            </div>
+
+            <!-- Scroll Down Indicator -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-1 text-romantic-400">
+                <span class="text-xs font-semibold tracking-widest uppercase">Scroll Down</span>
+                <i class="fa-solid fa-chevron-down animate-bounce text-sm"></i>
+            </div>
+        </header>
+
+        <!-- COUNTDOWN TIMER SECTION -->
+        <section id="countdown" class="py-20 px-4 relative max-w-5xl mx-auto">
+            <div class="absolute top-0 right-1/4 w-32 h-32 bg-romantic-200/30 rounded-full blur-2xl"></div>
+
+            <div class="text-center mb-12">
+                <span class="text-xs text-romantic-500 font-bold uppercase tracking-wider bg-romantic-100 px-3 py-1.5 rounded-full">Special Event Calendar</span>
+                <h2 class="font-serif text-3xl md:text-4xl text-slate-800 font-bold mt-3">Counting down to your special day... ⏳</h2>
+                <p class="text-slate-500 text-sm mt-2">Setiap detik menuju momen ulang tahunmu sangatlah berharga.</p>
+            </div>
+
+            <!-- Glass Countdown Container -->
+            <div class="glassmorphism max-w-3xl mx-auto rounded-3xl p-8 md:p-12 relative overflow-hidden">
+                <!-- Absolute subtle decorations -->
+                <div class="absolute -top-10 -left-10 w-24 h-24 bg-romantic-100/60 rounded-full"></div>
+                <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-romantic-200/50 rounded-full"></div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 relative z-10">
+                    <!-- Days -->
+                    <div class="bg-white/80 rounded-2xl p-4 md:p-6 text-center border border-white/40 shadow-sm flex flex-col justify-center">
+                        <span id="countdown-days" class="font-serif text-4xl md:text-5xl font-extrabold text-romantic-500">00</span>
+                        <span class="text-xs font-semibold text-slate-500 uppercase tracking-widest mt-2">Hari</span>
+                    </div>
+                    <!-- Hours -->
+                    <div class="bg-white/80 rounded-2xl p-4 md:p-6 text-center border border-white/40 shadow-sm flex flex-col justify-center">
+                        <span id="countdown-hours" class="font-serif text-4xl md:text-5xl font-extrabold text-romantic-500">00</span>
+                        <span class="text-xs font-semibold text-slate-500 uppercase tracking-widest mt-2">Jam</span>
+                    </div>
+                    <!-- Minutes -->
+                    <div class="bg-white/80 rounded-2xl p-4 md:p-6 text-center border border-white/40 shadow-sm flex flex-col justify-center">
+                        <span id="countdown-minutes" class="font-serif text-4xl md:text-5xl font-extrabold text-romantic-500">00</span>
+                        <span class="text-xs font-semibold text-slate-500 uppercase tracking-widest mt-2">Menit</span>
+                    </div>
+                    <!-- Seconds -->
+                    <div class="bg-white/80 rounded-2xl p-4 md:p-6 text-center border border-white/40 shadow-sm flex flex-col justify-center">
+                        <span id="countdown-seconds" class="font-serif text-4xl md:text-5xl font-extrabold text-romantic-500">00</span>
+                        <span class="text-xs font-semibold text-slate-500 uppercase tracking-widest mt-2">Detik</span>
+                    </div>
+                </div>
+
+                <div class="mt-8 text-center relative z-10">
+                    <p class="text-xs font-medium text-slate-500">Target Date: <span id="target-date-display" class="font-semibold text-romantic-500">15 Oktober 2026</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHOTOGRAPHY GALLERY SECTION -->
+        <section id="gallery" class="py-20 px-4 bg-white/40 relative">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <span class="text-xs text-romantic-500 font-bold uppercase tracking-wider bg-romantic-100 px-3 py-1.5 rounded-full">Gallery of Memories</span>
+                    <h2 class="font-serif text-3xl md:text-4xl text-slate-800 font-bold mt-3">Interactive Polaroid Collection 📸</h2>
+                    <p class="text-slate-500 text-sm mt-2">Kumpulan foto-foto estetik dan momen indah yang tertangkap lensa.</p>
+                </div>
+
+                <!-- Masonry-style Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Polaroid 1 (Main User Photo) -->
+                    <div class="polaroid bg-white p-4 pb-8 rounded shadow-lg border border-slate-100 cursor-pointer rotate-[-2deg] flex flex-col items-center" onclick="openLightbox('Lovelle.jpeg', 'You 🌸 - The prettiest girl under the sun.')">
+                        <div class="w-full aspect-square overflow-hidden rounded mb-4">
+                            <img src="Lovelle.jpeg" alt="Lovelle" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        </div>
+                        <p class="font-cursive text-2xl text-romantic-500">You 🌸</p>
+                        <p class="text-[10px] text-slate-400 font-mono mt-1">Capture #1</p>
+                    </div>
+
+                    <!-- Polaroid 2 (Generated Flower Bouquet) -->
+                    <div class="polaroid bg-white p-4 pb-8 rounded shadow-lg border border-slate-100 cursor-pointer rotate-[3deg] flex flex-col items-center" onclick="openLightbox('gallery_flower.png', 'Sweet Blossoms 🌸 - Beautiful flowers for a beautiful soul.')">
+                        <div class="w-full aspect-square overflow-hidden rounded mb-4">
+                            <img src="gallery_flower.png" alt="Aesthetic Flower Bouquet" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        </div>
+                        <p class="font-cursive text-2xl text-romantic-500">Sweet Blossoms 🌸</p>
+                        <p class="text-[10px] text-slate-400 font-mono mt-1">Capture #2</p>
+                    </div>
+
+                    <!-- Polaroid 3 (Generated Sunset Sky) -->
+                    <div class="polaroid bg-white p-4 pb-8 rounded shadow-lg border border-slate-100 cursor-pointer rotate-[-1deg] flex flex-col items-center" onclick="openLightbox('gallery_sunset.png', 'Dreamy Sky ☁️ - Soft pink clouds, like the warmth you bring.')">
+                        <div class="w-full aspect-square overflow-hidden rounded mb-4">
+                            <img src="gallery_sunset.png" alt="Pastel Sunset Sky" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        </div>
+                        <p class="font-cursive text-2xl text-romantic-500">Dreamy Sky ☁️</p>
+                        <p class="text-[10px] text-slate-400 font-mono mt-1">Capture #3</p>
+                    </div>
+
+                    <!-- Polaroid 4 (Generated Cozy Cafe) -->
+                    <div class="polaroid bg-white p-4 pb-8 rounded shadow-lg border border-slate-100 cursor-pointer rotate-[2deg] flex flex-col items-center" onclick="openLightbox('gallery_coffee.png', 'Cozy Warmth ☕ - Wishing you warm and peaceful mornings.')">
+                        <div class="w-full aspect-square overflow-hidden rounded mb-4">
+                            <img src="gallery_coffee.png" alt="Cozy Cafe Scene" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        </div>
+                        <p class="font-cursive text-2xl text-romantic-500">Cozy Warmth ☕</p>
+                        <p class="text-[10px] text-slate-400 font-mono mt-1">Capture #4</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SURPRISE SCRATCH CARD SECTION -->
+        <section id="letter" class="py-20 px-4 relative max-w-4xl mx-auto">
+            <div class="absolute bottom-10 left-10 w-40 h-40 bg-romantic-200/20 rounded-full blur-2xl"></div>
+
+            <div class="text-center mb-12">
+                <span class="text-xs text-romantic-500 font-bold uppercase tracking-wider bg-romantic-100 px-3 py-1.5 rounded-full">Interactive Surprise</span>
+                <h2 class="font-serif text-3xl md:text-4xl text-slate-800 font-bold mt-3">Scratch-off Secret Message 💌</h2>
+                <p class="text-slate-500 text-sm mt-2">Gosok area berwarna perak di bawah ini untuk membaca surat tulisan tangan rahasia dari lubuk hati.</p>
+            </div>
+
+            <!-- Envelope Container for Scratch Card -->
+            <div class="relative bg-white border border-romantic-200/80 rounded-3xl p-6 md:p-10 shadow-2xl overflow-hidden max-w-2xl mx-auto">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-romantic-100 to-transparent rounded-tr-3xl"></div>
+                
+                <!-- Secret message underlay -->
+                <div class="relative w-full min-h-[220px] md:min-h-[250px] flex items-center justify-center p-6 bg-romantic-50 border border-dashed border-romantic-200 rounded-2xl overflow-hidden">
+                    
+                    <!-- Hidden Content (Revealed after scratching) -->
+                    <div class="text-center z-0 w-full px-2 md:px-8">
+                        <i class="fa-solid fa-quote-left text-3xl text-romantic-300 block mb-4"></i>
+                        <p class="font-serif text-sm md:text-base text-slate-700 leading-relaxed italic mb-4">
+                            "Heyhoo, kamu itu sempurna, cantik, dan lucu banget! <br>
+                            Jangan pernah ngerasa kurang ya sayang, karena di mata aku dan orang-orang yang sayang kamu, kamu itu paket lengkap. <br>
+                            Stay happy, I always supporting you! ✨"
+                        </p>
+                        <p class="font-cursive text-2xl text-romantic-500 text-right mt-4">- Arif 💖</p>
+                    </div>
+
+                    <!-- Scratch Card Canvas Overlay -->
+                    <canvas id="scratch-canvas" class="absolute inset-0 w-full h-full rounded-2xl z-10 cursor-pointer select-none touch-none transition-opacity duration-700"></canvas>
+                </div>
+
+                <div class="mt-6 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <span class="text-[11px] font-semibold text-slate-400 flex items-center gap-1.5">
+                        <i class="fa-solid fa-wand-magic-sparkles text-romantic-400"></i> Gosok minimal 50% untuk membersihkan otomatis
+                    </span>
+                    <button onclick="resetScratchCard()" class="text-xs text-romantic-500 hover:text-romantic-600 font-bold border border-romantic-200 hover:border-romantic-300 px-3.5 py-1.5 rounded-full transition duration-300">
+                        <i class="fa-solid fa-redo mr-1"></i> Tutup Kembali
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER SECTION -->
+        <footer class="py-16 text-center border-t border-romantic-100 bg-white/60 relative">
+            <div class="max-w-md mx-auto px-4">
+                <div class="w-12 h-12 bg-romantic-100 text-romantic-500 rounded-full flex items-center justify-center mx-auto mb-4 animate-float">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <h3 class="font-cursive text-3xl text-romantic-500 mb-2">Made with love</h3>
+                <p class="text-slate-500 text-xs leading-relaxed max-w-xs mx-auto">
+                    Didedikasikan untuk seseorang yang sangat berharga. Semoga hari-harimu selalu dipenuhi dengan kebahagiaan dan tawa.
+                </p>
+                <div class="mt-6 flex justify-center gap-3 text-slate-400 text-sm">
+                    <i class="fa-solid fa-sparkles text-romantic-300"></i>
+                    <span>Arif &copy; 2026</span>
+                    <i class="fa-solid fa-sparkles text-romantic-300"></i>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- AUDIO PLAYER CONTAINER (Persistent Floating Widget, initially hidden) -->
+    <div id="audio-player-widget" class="fixed bottom-6 right-6 z-40 hidden transition-all duration-500 transform translate-y-20 opacity-0">
+        <!-- Main player card -->
+        <div class="bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl border border-romantic-100 p-3.5 flex items-center gap-4 w-72 md:w-80">
+            
+            <!-- Rotating CD Disc -->
+            <div class="relative flex-shrink-0">
+                <div id="player-disc" class="w-12 h-12 rounded-full bg-slate-900 border-2 border-slate-700 flex items-center justify-center shadow-md animate-spin-slow" style="animation-play-state: paused;">
+                    <!-- Inner Label -->
+                    <div class="w-4 h-4 rounded-full bg-white flex items-center justify-center">
+                        <div class="w-1 h-1 rounded-full bg-slate-900"></div>
+                    </div>
+                </div>
+                <!-- Glowing Heart Indicator -->
+                <span id="player-status-light" class="absolute bottom-0 right-0 w-3 h-3 bg-red-400 border border-white rounded-full flex items-center justify-center text-[5px] text-white">
+                    <i class="fa-solid fa-music text-[6px]"></i>
+                </span>
+            </div>
+
+            <!-- Track Info & Controls -->
+            <div class="flex-grow min-w-0">
+                <div class="flex items-center justify-between">
+                    <div class="truncate">
+                        <h4 class="font-semibold text-xs text-slate-800 truncate">Chest Pain (I Love)</h4>
+                        <p class="text-[10px] text-slate-400 truncate">Malcolm Todd</p>
+                    </div>
+                    <!-- Close/Minimize Toggle -->
+                    <button onclick="togglePlayerMinimize()" class="text-slate-400 hover:text-slate-600 p-1">
+                        <i id="minimize-icon" class="fa-solid fa-chevron-right text-[10px]"></i>
+                    </button>
+                </div>
+
+                <!-- Custom timeline slider -->
+                <div class="flex items-center gap-2 mt-1.5">
+                    <span id="player-time-current" class="text-[9px] text-slate-500 font-mono select-none">0:00</span>
+                    <input id="player-seek" type="range" min="0" max="100" value="0" class="flex-grow h-1 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-romantic-500 outline-none">
+                    <span id="player-time-total" class="text-[9px] text-slate-500 font-mono select-none">0:00</span>
+                </div>
+
+                <!-- Player buttons & mini volume visualizer -->
+                <div class="flex items-center justify-between mt-2">
+                    <div class="flex items-center gap-3">
+                        <button onclick="toggleAudioMute()" class="text-slate-500 hover:text-slate-700 text-xs">
+                            <i id="volume-icon" class="fa-solid fa-volume-high"></i>
+                        </button>
+                        <!-- Volume bar slider -->
+                        <input id="volume-seek" type="range" min="0" max="1" step="0.05" value="0.5" class="w-12 h-1 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-romantic-500 outline-none">
+                    </div>
+
+                    <!-- Main Play/Pause circular button -->
+                    <button onclick="toggleAudioPlay()" class="w-7 h-7 bg-romantic-400 hover:bg-romantic-500 text-white rounded-full flex items-center justify-center shadow hover:scale-105 active:scale-95 transition-all">
+                        <i id="play-pause-icon" class="fa-solid fa-play ml-0.5 text-xs"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pulser bars visualizer stack -->
+        <div id="visualizer-waves" class="flex items-end justify-center gap-[2px] h-3 mt-1.5 px-6 opacity-60">
+            <div class="w-[3px] bg-romantic-400 h-1 rounded-t transition-all duration-150"></div>
+            <div class="w-[3px] bg-romantic-400 h-1 rounded-t transition-all duration-150"></div>
+            <div class="w-[3px] bg-romantic-400 h-1 rounded-t transition-all duration-150"></div>
+            <div class="w-[3px] bg-romantic-400 h-1 rounded-t transition-all duration-150"></div>
+            <div class="w-[3px] bg-romantic-400 h-1 rounded-t transition-all duration-150"></div>
+            <div class="w-[3px] bg-romantic-400 h-1 rounded-t transition-all duration-150"></div>
+            <div class="w-[3px] bg-romantic-400 h-1 rounded-t transition-all duration-150"></div>
+            <div class="w-[3px] bg-romantic-400 h-1 rounded-t transition-all duration-150"></div>
+        </div>
+    </div>
+
+    <!-- Hidden HTML5 Audio Element -->
+    <audio id="bg-audio" loop preload="auto">
+        <source src="background.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- PHOTO LIGHTBOX MODAL -->
+    <div id="lightbox" class="fixed inset-0 bg-slate-950/95 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300 flex flex-col items-center justify-center p-4">
+        <!-- Close Button -->
+        <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white hover:text-romantic-300 text-3xl p-2 transition">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="max-w-4xl max-h-[80vh] w-full h-full flex items-center justify-center relative">
+            <img id="lightbox-img" src="" alt="Zoomed view" class="max-w-full max-h-full object-contain rounded shadow-2xl border-4 border-white/10">
+        </div>
+
+        <div class="text-center mt-6 max-w-xl">
+            <p id="lightbox-caption" class="font-serif text-lg text-white font-medium italic"></p>
+            <p class="text-xs text-romantic-300 font-semibold tracking-widest uppercase mt-2">Polaroid Memory</p>
+        </div>
+    </div>
+
+    <!-- MAIN APP JAVASCRIPT -->
+    <script>
+        // CONFIGURATIONS
+        // Set the countdown target date (defaults to next October 15, or customizable)
+        const currentYear = new Date().getFullYear();
+        let targetBirthday = new Date(`October 15, ${currentYear} 00:00:00`);
+        
+        // If the date has already passed this year, count down to next year's birthday
+        if (new Date() > targetBirthday) {
+            targetBirthday = new Date(`October 15, ${currentYear + 1} 00:00:00`);
+        }
+        
+        // Display target date in Indonesian format
+        const options = { day: 'numeric', month: 'long', year: 'numeric' };
+        if (document.getElementById('target-date-display')) {
+            document.getElementById('target-date-display').innerText = targetBirthday.toLocaleDateString('id-ID', options);
+        }
+
+        // Date Lock Screen Enforcement
+        const urlParams = new URLSearchParams(window.location.search);
+        const isBypass = urlParams.get('bypass') === 'true' || urlParams.get('test') === 'true';
+        const now = new Date();
+        
+        if (!isBypass && now < targetBirthday) {
+            const lockOverlay = document.getElementById('root-lock-screen');
+            if (lockOverlay) {
+                lockOverlay.classList.remove('hidden');
+                
+                // Display target date
+                const lockOptions = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+                document.getElementById('lock-target-date-display').innerText = targetBirthday.toLocaleDateString('id-ID', lockOptions);
+                
+                // Start lock countdown loop
+                const lockInterval = setInterval(() => {
+                    const currentTime = new Date().getTime();
+                    const diff = targetBirthday.getTime() - currentTime;
+                    
+                    if (diff <= 0) {
+                        clearInterval(lockInterval);
+                        lockOverlay.classList.add('opacity-0');
+                        setTimeout(() => {
+                            lockOverlay.classList.add('hidden');
+                        }, 1000);
+                        return;
+                    }
+                    
+                    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    const s = Math.floor((diff % (1000 * 60)) / 1000);
+                    
+                    document.getElementById('lock-days').innerText = d < 10 ? '0' + d : d;
+                    document.getElementById('lock-hours').innerText = h < 10 ? '0' + h : h;
+                    document.getElementById('lock-minutes').innerText = m < 10 ? '0' + m : m;
+                    document.getElementById('lock-seconds').innerText = s < 10 ? '0' + s : s;
+                }, 1000);
+            }
+        }
+
+        // Typing Effect Texts
+        const typingPhrases = [
+            "Hei cantik... Kamu tahu nggak?",
+            "Kamu itu sempurna, cantik, dan lucu banget! ✨",
+            "Jangan pernah merasa kurang ya, karena di mataku...",
+            "Kamu adalah paket lengkap yang sangat indah. 💖",
+            "I will always be here to support you in everything you do.",
+            "Semoga hari-harimu penuh tawa dan kebahagiaan!",
+            "Enjoy this little space, made especially for you. 🌸"
+        ];
+
+        // AUDIO PLAYER LOGIC
+        const audio = document.getElementById('bg-audio');
+        const playPauseBtn = document.getElementById('play-pause-icon');
+        const playerDisc = document.getElementById('player-disc');
+        const seekSlider = document.getElementById('player-seek');
+        const volSlider = document.getElementById('volume-seek');
+        const timeCurrent = document.getElementById('player-time-current');
+        const timeTotal = document.getElementById('player-time-total');
+        const volIcon = document.getElementById('volume-icon');
+        const visualizerBars = document.querySelectorAll('#visualizer-waves div');
+        let isMuted = false;
+        let preMuteVolume = 0.5;
+        let isWidgetMinimized = false;
+        let visualizerInterval;
+
+        // Initialize audio settings
+        audio.volume = 0.5;
+
+        function toggleAudioPlay() {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    playPauseBtn.className = "fa-solid fa-pause text-xs";
+                    playerDisc.style.animationPlayState = "running";
+                    document.getElementById('player-status-light').className = "absolute bottom-0 right-0 w-3 h-3 bg-green-500 border border-white rounded-full flex items-center justify-center text-[5px] text-white";
+                    startVisualizer();
+                }).catch(err => {
+                    console.log("Audio play failed:", err);
+                });
+            } else {
+                audio.pause();
+                playPauseBtn.className = "fa-solid fa-play ml-0.5 text-xs";
+                playerDisc.style.animationPlayState = "paused";
+                document.getElementById('player-status-light').className = "absolute bottom-0 right-0 w-3 h-3 bg-red-400 border border-white rounded-full flex items-center justify-center text-[5px] text-white";
+                stopVisualizer();
+            }
+        }
+
+        // Sync Audio Progress
+        audio.addEventListener('timeupdate', () => {
+            if (!isNaN(audio.duration)) {
+                const percent = (audio.currentTime / audio.duration) * 100;
+                seekSlider.value = percent;
+                timeCurrent.innerText = formatTime(audio.currentTime);
+            }
+        });
+
+        // Set duration when metadata is loaded
+        audio.addEventListener('loadedmetadata', () => {
+            timeTotal.innerText = formatTime(audio.duration);
+        });
+
+        // Seek Audio
+        seekSlider.addEventListener('input', () => {
+            if (!isNaN(audio.duration)) {
+                const seekTo = (seekSlider.value / 100) * audio.duration;
+                audio.currentTime = seekTo;
+            }
+        });
+
+        // Volume Control
+        volSlider.addEventListener('input', () => {
+            audio.volume = volSlider.value;
+            if (audio.volume === 0) {
+                volIcon.className = "fa-solid fa-volume-xmark";
+                isMuted = true;
+            } else if (audio.volume < 0.4) {
+                volIcon.className = "fa-solid fa-volume-low";
+                isMuted = false;
+            } else {
+                volIcon.className = "fa-solid fa-volume-high";
+                isMuted = false;
+            }
+        });
+
+        function toggleAudioMute() {
+            if (isMuted) {
+                audio.volume = preMuteVolume;
+                volSlider.value = preMuteVolume;
+                isMuted = false;
+                volIcon.className = preMuteVolume < 0.4 ? "fa-solid fa-volume-low" : "fa-solid fa-volume-high";
+            } else {
+                preMuteVolume = audio.volume;
+                audio.volume = 0;
+                volSlider.value = 0;
+                isMuted = true;
+                volIcon.className = "fa-solid fa-volume-xmark";
+            }
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        // Minimize Audio Player Widget
+        function togglePlayerMinimize() {
+            const widget = document.getElementById('audio-player-widget');
+            const icon = document.getElementById('minimize-icon');
+            
+            if (isWidgetMinimized) {
+                // Restore
+                widget.style.transform = "translateX(0)";
+                icon.className = "fa-solid fa-chevron-right text-[10px]";
+                isWidgetMinimized = false;
+            } else {
+                // Minimize
+                widget.style.transform = "translateX(75%)";
+                icon.className = "fa-solid fa-chevron-left text-[10px]";
+                isWidgetMinimized = true;
+            }
+        }
+
+        // Simple Simulated Equalizer Wave
+        function startVisualizer() {
+            stopVisualizer();
+            visualizerInterval = setInterval(() => {
+                visualizerBars.forEach(bar => {
+                    const h = Math.floor(Math.random() * 12) + 2; // Random height between 2px and 14px
+                    bar.style.height = `${h}px`;
+                });
+            }, 100);
+        }
+
+        function stopVisualizer() {
+            clearInterval(visualizerInterval);
+            visualizerBars.forEach(bar => {
+                bar.style.height = `4px`;
             });
         }
 
-        function playMusic() {
-            player.playVideo();
-            document.querySelector('.play-btn').innerText = "Playing... 🥰";
-        }
 
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = '🩷';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
-            heart.style.opacity = Math.random();
-            document.body.appendChild(heart);
+        // UNLOCK SURPRISE (Opening Envelope)
+        function openGift() {
+            const envelope = document.getElementById('main-envelope');
+            const seal = document.getElementById('wax-seal');
+            const gate = document.getElementById('gate');
+            const app = document.getElementById('app-content');
+            const widget = document.getElementById('audio-player-widget');
 
+            // 1. Break Seal and Open Flap
+            seal.style.transform = "scale(0) rotate(180deg)";
             setTimeout(() => {
-                heart.remove();
-            }, 5000);
+                envelope.classList.add('open');
+            }, 300);
+
+            // 2. Transition envelope & show main content
+            setTimeout(() => {
+                // Fade out Gate screen
+                gate.classList.add('opacity-0', 'scale-110', 'pointer-events-none');
+                
+                // Set Up App Content Display
+                app.classList.remove('hidden');
+                setTimeout(() => {
+                    app.classList.remove('opacity-0', 'blur-md');
+                }, 50);
+
+                // Show player widget
+                widget.classList.remove('hidden');
+                setTimeout(() => {
+                    widget.classList.remove('translate-y-20', 'opacity-0');
+                }, 200);
+
+                // Start processes
+                startFallingParticles();
+                startCountdown();
+                startTypingEffect();
+                initScratchCard();
+                
+                // Play audio automatically (if allowed by browser)
+                toggleAudioPlay();
+            }, 1800);
         }
 
-        setInterval(createHeart, 300);
-    </script>
 
+        // TYPING TEXT EFFECT
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingSpeed = 70;
+        const deletingSpeed = 40;
+        const delayBetweenPhrases = 2500;
+
+        function startTypingEffect() {
+            const textEl = document.getElementById('typing-text');
+            const currentPhrase = typingPhrases[phraseIndex];
+
+            if (!isDeleting && charIndex < currentPhrase.length) {
+                // Typing
+                textEl.innerHTML = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+                setTimeout(startTypingEffect, typingSpeed);
+            } else if (isDeleting && charIndex > 0) {
+                // Deleting
+                textEl.innerHTML = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(startTypingEffect, deletingSpeed);
+            } else if (!isDeleting && charIndex === currentPhrase.length) {
+                // Full sentence printed, wait before deleting or moving to next
+                isDeleting = true;
+                setTimeout(startTypingEffect, delayBetweenPhrases);
+            } else if (isDeleting && charIndex === 0) {
+                // Finished deleting, go to next phrase
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % typingPhrases.length;
+                setTimeout(startTypingEffect, 300);
+            }
+        }
+
+
+        // COUNTDOWN TIMER LOGIC
+        function startCountdown() {
+            const daysEl = document.getElementById('countdown-days');
+            const hoursEl = document.getElementById('countdown-hours');
+            const minsEl = document.getElementById('countdown-minutes');
+            const secsEl = document.getElementById('countdown-seconds');
+
+            function updateCounter() {
+                const now = new Date().getTime();
+                const distance = targetBirthday.getTime() - now;
+
+                if (distance < 0) {
+                    // Birthday reached!
+                    daysEl.innerText = "00";
+                    hoursEl.innerText = "00";
+                    minsEl.innerText = "00";
+                    secsEl.innerText = "00";
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                daysEl.innerText = days < 10 ? '0' + days : days;
+                hoursEl.innerText = hours < 10 ? '0' + hours : hours;
+                minsEl.innerText = minutes < 10 ? '0' + minutes : minutes;
+                secsEl.innerText = seconds < 10 ? '0' + seconds : seconds;
+            }
+
+            setInterval(updateCounter, 1000);
+            updateCounter();
+        }
+
+
+        // INTERACTIVE SCRATCH CARD LOGIC
+        let canvas, ctx;
+        let isDrawing = false;
+        let scratchedPercent = 0;
+
+        function initScratchCard() {
+            canvas = document.getElementById('scratch-canvas');
+            ctx = canvas.getContext('2d');
+            
+            // Adjust canvas resolution with layout
+            resizeScratchCanvas();
+            window.addEventListener('resize', resizeScratchCanvas);
+            
+            // Mouse & Touch events
+            canvas.addEventListener('mousedown', scratchStart);
+            canvas.addEventListener('mousemove', scratchDraw);
+            canvas.addEventListener('mouseup', scratchEnd);
+            canvas.addEventListener('mouseleave', scratchEnd);
+
+            canvas.addEventListener('touchstart', scratchStart, { passive: true });
+            canvas.addEventListener('touchmove', scratchDraw, { passive: true });
+            canvas.addEventListener('touchend', scratchEnd);
+        }
+
+        function resizeScratchCanvas() {
+            if (!canvas) return;
+            const rect = canvas.parentNode.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            drawScratchOverlay();
+        }
+
+        function drawScratchOverlay() {
+            // Fill scratch overlay with gradient
+            const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            grad.addColorStop(0, '#e2e8f0'); // slate-200
+            grad.addColorStop(0.5, '#ffd2dc'); // romantic pastel
+            grad.addColorStop(1, '#cbd5e1'); // slate-300
+            
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Add instructions pattern
+            ctx.font = 'bold 16px font-sans, sans-serif';
+            ctx.fillStyle = '#db2777'; // pink-600
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('Gosok di Sini 🤫💖', canvas.width / 2, canvas.height / 2 - 10);
+            
+            ctx.font = '11px font-sans, sans-serif';
+            ctx.fillStyle = '#64748b'; // slate-500
+            ctx.fillText('Gunakan jari / mouse untuk menggosok', canvas.width / 2, canvas.height / 2 + 15);
+        }
+
+        function getMousePos(e) {
+            const rect = canvas.getBoundingClientRect();
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            return {
+                x: clientX - rect.left,
+                y: clientY - rect.top
+            };
+        }
+
+        function scratchStart(e) {
+            isDrawing = true;
+            scratchDraw(e);
+        }
+
+        function scratchDraw(e) {
+            if (!isDrawing) return;
+            const pos = getMousePos(e);
+            
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.beginPath();
+            ctx.arc(pos.x, pos.y, 22, 0, Math.PI * 2); // 22px brush size
+            ctx.fill();
+        }
+
+        function scratchEnd() {
+            if (!isDrawing) return;
+            isDrawing = false;
+            
+            // Calculate scratch percentage
+            checkScratchedPercentage();
+        }
+
+        function checkScratchedPercentage() {
+            const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const pixels = imgData.data;
+            let clearedCount = 0;
+
+            for (let i = 3; i < pixels.length; i += 4) {
+                if (pixels[i] === 0) clearedCount++;
+            }
+
+            scratchedPercent = (clearedCount / (pixels.length / 4)) * 100;
+            
+            if (scratchedPercent > 50) {
+                // Fade out canvas automatically
+                canvas.style.opacity = '0';
+                setTimeout(() => {
+                    canvas.style.pointerEvents = 'none';
+                }, 700);
+            }
+        }
+
+        function resetScratchCard() {
+            if (!canvas) return;
+            canvas.style.opacity = '1';
+            canvas.style.pointerEvents = 'auto';
+            drawScratchOverlay();
+            scratchedPercent = 0;
+        }
+
+
+        // FLOATING HEART PARTICLES
+        let particleCanvas, pCtx;
+        let particles = [];
+        const particleColors = ['#ff8fa3', '#ffcad4', '#ff6b81', '#ff4757', '#ffd2dc'];
+        const shapes = ['heart', 'sparkle', 'circle'];
+
+        function startFallingParticles() {
+            particleCanvas = document.getElementById('particle-canvas');
+            pCtx = particleCanvas.getContext('2d');
+
+            resizeParticleCanvas();
+            window.addEventListener('resize', resizeParticleCanvas);
+
+            // Create initial particles
+            for (let i = 0; i < 40; i++) {
+                particles.push(createParticle(true));
+            }
+
+            animateParticles();
+        }
+
+        function resizeParticleCanvas() {
+            particleCanvas.width = window.innerWidth;
+            particleCanvas.height = window.innerHeight;
+        }
+
+        function createParticle(randomY = false) {
+            return {
+                x: Math.random() * particleCanvas.width,
+                y: randomY ? Math.random() * particleCanvas.height : -20,
+                size: Math.random() * 8 + 4,
+                speedY: Math.random() * 1.5 + 0.8,
+                speedX: (Math.random() - 0.5) * 1,
+                color: particleColors[Math.floor(Math.random() * particleColors.length)],
+                shape: shapes[Math.floor(Math.random() * shapes.length)],
+                opacity: Math.random() * 0.7 + 0.3,
+                rotation: Math.random() * Math.PI,
+                rotSpeed: (Math.random() - 0.5) * 0.02
+            };
+        }
+
+        function drawHeart(x, y, size, color, opacity, rotation) {
+            pCtx.save();
+            pCtx.translate(x, y);
+            pCtx.rotate(rotation);
+            pCtx.globalAlpha = opacity;
+            pCtx.fillStyle = color;
+            pCtx.beginPath();
+            
+            // Bezier curve heart path
+            const topY = -size / 2;
+            pCtx.moveTo(0, size / 2);
+            pCtx.bezierCurveTo(-size, 0, -size, topY, -size / 2, topY);
+            pCtx.bezierCurveTo(0, topY, 0, 0, 0, size / 2);
+            pCtx.moveTo(0, size / 2);
+            pCtx.bezierCurveTo(size, 0, size, topY, size / 2, topY);
+            pCtx.bezierCurveTo(0, topY, 0, 0, 0, size / 2);
+            
+            pCtx.fill();
+            pCtx.restore();
+        }
+
+        function drawSparkle(x, y, size, color, opacity, rotation) {
+            pCtx.save();
+            pCtx.translate(x, y);
+            pCtx.rotate(rotation);
+            pCtx.globalAlpha = opacity;
+            pCtx.fillStyle = color;
+            pCtx.beginPath();
+            for (let i = 0; i < 4; i++) {
+                pCtx.lineTo(0, -size);
+                pCtx.lineTo(size/4, -size/4);
+                pCtx.rotate(Math.PI / 2);
+            }
+            pCtx.closePath();
+            pCtx.fill();
+            pCtx.restore();
+        }
+
+        function drawCircle(x, y, size, color, opacity) {
+            pCtx.save();
+            pCtx.globalAlpha = opacity;
+            pCtx.fillStyle = color;
+            pCtx.beginPath();
+            pCtx.arc(x, y, size / 2, 0, Math.PI * 2);
+            pCtx.fill();
+            pCtx.restore();
+        }
+
+        function animateParticles() {
+            pCtx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
+
+            for (let i = 0; i < particles.length; i++) {
+                const p = particles[i];
+                p.y += p.speedY;
+                p.x += p.speedX;
+                p.rotation += p.rotSpeed;
+
+                // Bounce off edges slightly
+                if (p.x < 0 || p.x > particleCanvas.width) p.speedX *= -1;
+
+                // Draw based on shape
+                if (p.shape === 'heart') {
+                    drawHeart(p.x, p.y, p.size, p.color, p.opacity, p.rotation);
+                } else if (p.shape === 'sparkle') {
+                    drawSparkle(p.x, p.y, p.size, p.color, p.opacity, p.rotation);
+                } else {
+                    drawCircle(p.x, p.y, p.size, p.color, p.opacity);
+                }
+
+                // If particle out of screen, recycle it
+                if (p.y > particleCanvas.height + 20) {
+                    particles[i] = createParticle(false);
+                }
+            }
+
+            requestAnimationFrame(animateParticles);
+        }
+
+
+        // LIGHTBOX IMAGE MODAL LOGIC
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+
+        function openLightbox(src, desc) {
+            lightboxImg.src = src;
+            lightboxCaption.innerText = desc;
+            
+            lightbox.classList.remove('hidden');
+            // Force reflow for transition
+            lightbox.offsetHeight;
+            lightbox.classList.remove('opacity-0');
+        }
+
+        function closeLightbox() {
+            lightbox.classList.add('opacity-0');
+            setTimeout(() => {
+                lightbox.classList.add('hidden');
+            }, 300);
+        }
+
+        // Close lightbox on click outside the image
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox || e.target.closest('button')) {
+                closeLightbox();
+            }
+        });
+    </script>
 </body>
 </html>
