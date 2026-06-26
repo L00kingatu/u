@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Date check logic
     const urlParams = new URLSearchParams(window.location.search);
     const isBypass = urlParams.get('bypass') === 'true' || urlParams.get('test') === 'true';
-    
+
     // Display target date in human-readable format
     const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
     const targetDateStrEl = document.getElementById('target-date-str');
@@ -108,10 +108,10 @@ function bukaKejutan() {
 
     cover.style.opacity = '0';
     cover.style.transform = 'scale(0.95)';
-    
+
     setTimeout(() => {
         cover.classList.add('hidden');
-        
+
         const mainContent = document.getElementById('main-content');
         if (mainContent) {
             mainContent.classList.remove('hidden');
@@ -119,7 +119,7 @@ function bukaKejutan() {
                 mainContent.classList.add('show');
             }, 100);
         }
-        
+
         // Auto play audio on interaction
         if (audio) {
             audio.play().then(() => {
@@ -154,7 +154,7 @@ function startTypingEffect() {
     const textEl = document.getElementById('message-text');
     if (!textEl) return;
     textEl.innerHTML = "";
-    
+
     function type() {
         if (charIndex < messageText.length) {
             const char = messageText[charIndex];
@@ -175,20 +175,20 @@ function kirimCinta(event) {
     let loveCount = parseInt(localStorage.getItem('love_count') || '0');
     loveCount++;
     localStorage.setItem('love_count', loveCount);
-    
+
     const countEl = document.getElementById('love-count');
     if (countEl) countEl.innerText = loveCount;
-    
+
     // Spawn flying hearts at button position
     const btnRect = event.currentTarget.getBoundingClientRect();
     const startX = btnRect.left + btnRect.width / 2;
     const startY = btnRect.top;
-    
+
     // Only spawn if particle system is initialized
     if (!canvas) {
         initParticles();
     }
-    
+
     for (let i = 0; i < 12; i++) {
         particles.push({
             x: startX + (Math.random() - 0.5) * 30,
@@ -213,15 +213,15 @@ function initParticles() {
     canvas = document.getElementById('particle-canvas');
     if (!canvas) return;
     ctx = canvas.getContext('2d');
-    
+
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
-    
+
     // Generate initial floating particles
     for (let i = 0; i < 25; i++) {
         particles.push(createParticle(true));
     }
-    
+
     animateParticles();
 }
 
@@ -254,7 +254,7 @@ function drawHeart(x, y, size, color, opacity, rotation) {
     ctx.globalAlpha = opacity;
     ctx.fillStyle = color;
     ctx.beginPath();
-    
+
     const topY = -size / 2;
     ctx.moveTo(0, size / 2);
     ctx.bezierCurveTo(-size, 0, -size, topY, -size / 2, topY);
@@ -262,7 +262,7 @@ function drawHeart(x, y, size, color, opacity, rotation) {
     ctx.moveTo(0, size / 2);
     ctx.bezierCurveTo(size, 0, size, topY, size / 2, topY);
     ctx.bezierCurveTo(0, topY, 0, 0, 0, size / 2);
-    
+
     ctx.fill();
     ctx.restore();
 }
@@ -276,7 +276,7 @@ function drawSparkle(x, y, size, color, opacity, rotation) {
     ctx.beginPath();
     for (let i = 0; i < 4; i++) {
         ctx.lineTo(0, -size);
-        ctx.lineTo(size/4, -size/4);
+        ctx.lineTo(size / 4, -size / 4);
         ctx.rotate(Math.PI / 2);
     }
     ctx.closePath();
@@ -297,18 +297,18 @@ function drawCircle(x, y, size, color, opacity) {
 function animateParticles() {
     if (!ctx) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
+
     for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
         p.y += p.speedY;
         p.x += p.speedX;
         p.rotation += p.rotSpeed;
-        
+
         // Bounce off screen edges slightly
         if (p.x < 0 || p.x > canvas.width) {
             p.speedX *= -1;
         }
-        
+
         // If particle moves off the top of the screen
         if (p.y < -20) {
             if (p.isClickSpawned) {
@@ -321,7 +321,7 @@ function animateParticles() {
                 particles[i] = createParticle(false);
             }
         }
-        
+
         // Draw shape
         if (p.shape === 'heart') {
             drawHeart(p.x, p.y, p.size, p.color, p.opacity, p.rotation);
@@ -331,7 +331,7 @@ function animateParticles() {
             drawCircle(p.x, p.y, p.size, p.color, p.opacity);
         }
     }
-    
+
     requestAnimationFrame(animateParticles);
 }
 
@@ -340,7 +340,7 @@ function animateParticles() {
 // ----------------------------------------------------
 function togglePlay() {
     if (!audio) return;
-    
+
     if (audio.paused) {
         audio.play().then(() => {
             if (playIcon) playIcon.className = "fa-solid fa-pause";
@@ -357,7 +357,7 @@ function togglePlay() {
 
 function updateAudioProgress() {
     if (!audio || !progressBar || !currentTimeEl) return;
-    
+
     if (!isNaN(audio.duration)) {
         const percent = (audio.currentTime / audio.duration) * 100;
         progressBar.style.width = percent + '%';
@@ -367,7 +367,7 @@ function updateAudioProgress() {
 
 function setSeek(event) {
     if (!audio || isNaN(audio.duration)) return;
-    
+
     const rect = event.currentTarget.getBoundingClientRect();
     const clickX = event.clientX - rect.left;
     const width = rect.width;
