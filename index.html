@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Hadiah Spesial</title>
+    <title>A Secret Message For You ✨</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Koleksi proyek hadiah spesial yang dibuat dengan cinta. Jelajahi berbagai halaman interaktif untuk moment spesial Anda.">
-    <meta name="keywords" content="hadiah spesial, ulang tahun, gift interactive, portal hadiah">
-    <meta name="author" content="Arif">
+    <meta name="description" content="Sebuah pesan rahasia dari seseorang yang diam-diam mengagumi keindahanmu.">
+    <meta name="keywords" content="secret admirer, love letter, untuk kamu">
+    <meta name="author" content="Someone Who Admires You">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,7 +46,7 @@
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
                         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'glow': 'glow 2s ease-in-out infinite',
+                        'shimmer': 'shimmer 2s ease-in-out infinite',
                     }
                 }
             }
@@ -56,12 +56,23 @@
     <style>
         @keyframes float {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(2deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
         }
 
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(255, 71, 87, 0.4); }
-            50% { box-shadow: 0 0 30px rgba(255, 107, 129, 0.6); }
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .glass-effect {
@@ -70,253 +81,204 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .project-card {
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px);
-        }
-
         .text-glow {
-            text-shadow: 0 0 15px rgba(255, 107, 129, 0.4);
+            text-shadow: 0 0 20px rgba(255, 107, 129, 0.5);
+        }
+
+        .letter-paper {
+            background: linear-gradient(135deg, rgba(255, 250, 250, 0.95) 0%, rgba(255, 240, 245, 0.95) 100%);
+            border-left: 4px solid #ff6b81;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+
+        body {
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+        }
+
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
     </style>
 </head>
 <body class="bg-gradient-to-br from-romantic-50 via-white to-pink-50 font-sans text-slate-800 overflow-x-hidden">
 
-    <!-- Navigation Bar -->
-    <nav class="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-romantic-100/30">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <i class="fa-solid fa-gift text-romantic-500 text-2xl"></i>
-                <h1 class="font-serif text-xl font-bold text-romantic-500">Creative Collection</h1>
-            </div>
-            <div class="flex items-center gap-4">
-                <a href="#projects" class="text-slate-600 hover:text-romantic-500 transition">Proyek</a>
-                <a href="#about" class="text-slate-600 hover:text-romantic-500 transition">Tentang</a>
-            </div>
-        </div>
-    </nav>
+    <!-- Floating particles background -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden">
+        <div class="absolute top-10 left-10 w-32 h-32 bg-romantic-200/10 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div class="absolute bottom-20 right-10 w-40 h-40 bg-romantic-300/10 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div class="absolute top-1/2 right-1/4 w-32 h-32 bg-romantic-100/10 rounded-full blur-3xl animate-pulse-slow"></div>
+    </div>
 
-    <!-- Hero Section -->
-    <section class="relative min-h-screen flex flex-col items-center justify-center px-4 pt-20 overflow-hidden">
-        <!-- Decorative Blobs -->
-        <div class="absolute top-20 left-10 w-72 h-72 bg-romantic-200/20 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-20 right-10 w-80 h-80 bg-romantic-300/15 rounded-full blur-3xl"></div>
+    <!-- Main Content -->
+    <div class="relative z-10">
 
-        <div class="relative z-10 text-center max-w-3xl mx-auto">
-            <div class="mb-6 inline-block">
-                <span class="text-6xl animate-float">💝</span>
-            </div>
+        <!-- Hero Section -->
+        <section class="min-h-screen flex flex-col items-center justify-center px-4 pt-20">
+            <div class="max-w-2xl mx-auto text-center fade-in-up">
+                <div class="mb-8">
+                    <span class="text-7xl animate-float inline-block">💌</span>
+                </div>
 
-            <h2 class="font-serif text-5xl md:text-7xl font-bold text-romantic-500 mb-4 text-glow">
-                Portal Hadiah Spesial
-            </h2>
+                <h1 class="font-serif text-5xl md:text-7xl font-bold text-romantic-500 mb-4 text-glow">
+                    Hai, Kamu
+                </h1>
 
-            <p class="text-lg md:text-xl text-slate-600 mb-6 leading-relaxed">
-                Sebuah koleksi proyek interaktif yang dibuat dengan penuh cinta untuk moment spesial. Setiap halaman dirancang khusus untuk memberikan kesan mendalam dan tak terlupakan.
-            </p>
-
-            <div class="flex gap-4 justify-center flex-wrap">
-                <a href="#projects" class="bg-romantic-500 hover:bg-romantic-600 text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition transform hover:scale-105">
-                    <i class="fa-solid fa-arrow-down mr-2"></i>Jelajahi Proyek
-                </a>
-                <a href="#about" class="bg-white hover:bg-slate-50 text-romantic-500 font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition border border-romantic-200">
-                    <i class="fa-solid fa-circle-info mr-2"></i>Pelajari Lebih Lanjut
-                </a>
-            </div>
-        </div>
-
-        <!-- Scroll Indicator -->
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2">
-            <span class="text-xs text-romantic-400 font-semibold tracking-wider uppercase">Scroll Down</span>
-            <i class="fa-solid fa-chevron-down animate-bounce text-romantic-400"></i>
-        </div>
-    </section>
-
-    <!-- Projects Grid Section -->
-    <section id="projects" class="py-20 px-4 relative">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <span class="text-sm text-romantic-500 font-bold uppercase tracking-wider bg-romantic-100/60 px-4 py-2 rounded-full inline-block mb-4">Koleksi Proyek</span>
-                <h2 class="font-serif text-4xl md:text-5xl font-bold text-slate-800 mb-4">
-                    Pilih Portal Hadiah Anda
-                </h2>
-                <p class="text-slate-600 text-lg max-w-2xl mx-auto">
-                    Setiap proyek menawarkan pengalaman unik dan interaktif dengan fitur-fitur menarik.
+                <p class="text-lg md:text-xl text-slate-600 mb-6 leading-relaxed font-light">
+                    Ada seseorang yang diam-diam mengagumi keindahanmu. Seseorang yang melihat setiap senyuman kamu, mendengarkan setiap kata yang kamu ucapkan, dan menghargai setiap momen yang kamu biarkan kami bagikan.
                 </p>
-            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-                <!-- Project 1: HAI -->
-                <div class="project-card group">
-                    <a href="HAI/index.html" class="block h-full">
-                        <div class="glass-effect rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl h-full flex flex-col transition">
-                            <div class="bg-gradient-to-br from-romantic-200 to-romantic-300 h-40 flex items-center justify-center text-6xl group-hover:scale-110 transition duration-300">
-                                🌸
-                            </div>
-                            <div class="p-6 flex flex-col flex-grow">
-                                <h3 class="font-serif text-2xl font-bold text-romantic-500 mb-2">HAI</h3>
-                                <p class="text-slate-600 text-sm mb-4 flex-grow">
-                                    Halaman romantic dengan envelope interaktif dan pesan spesial yang menunggu untuk dibuka.
-                                </p>
-                                <div class="flex gap-2 text-xs">
-                                    <span class="bg-romantic-100 text-romantic-600 px-2 py-1 rounded-full">Interactive</span>
-                                    <span class="bg-romantic-100 text-romantic-600 px-2 py-1 rounded-full">Envelope</span>
-                                </div>
-                            </div>
-                            <div class="px-6 pb-4 pt-0">
-                                <button class="w-full bg-romantic-500 hover:bg-romantic-600 text-white font-semibold py-2 rounded-lg transition">
-                                    Buka <i class="fa-solid fa-arrow-right ml-2"></i>
-                                </button>
-                            </div>
-                        </div>
+                <p class="text-base md:text-lg text-slate-500 mb-12 leading-relaxed italic">
+                    Website ini adalah caranya untuk menunjukkan berapa berhargamu di hatinya. Setiap halaman, setiap animasi, setiap kata... semuanya dibuat khusus untuk kamu.
+                </p>
+
+                <div class="flex gap-4 justify-center flex-wrap mb-12">
+                    <a href="#story" class="bg-romantic-500 hover:bg-romantic-600 text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition transform hover:scale-105">
+                        Baca Cerita <i class="fa-solid fa-arrow-down ml-2"></i>
                     </a>
                 </div>
 
-                <!-- Project 2: NVM -->
-                <div class="project-card group">
-                    <a href="NVM/index.html" class="block h-full">
-                        <div class="glass-effect rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl h-full flex flex-col transition">
-                            <div class="bg-gradient-to-br from-blue-200 to-blue-300 h-40 flex items-center justify-center text-6xl group-hover:scale-110 transition duration-300">
+                <!-- Scroll Indicator -->
+                <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-center">
+                    <p class="text-xs text-romantic-400 font-semibold tracking-wider uppercase mb-2">Scroll untuk lanjut</p>
+                    <i class="fa-solid fa-chevron-down text-romantic-400 scroll-indicator"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Story Section -->
+        <section id="story" class="py-20 px-4">
+            <div class="max-w-2xl mx-auto">
+                <div class="letter-paper glass-effect rounded-2xl p-8 md:p-12 fade-in-up">
+                    <h2 class="font-serif text-3xl font-bold text-romantic-500 mb-8 text-center">Surat Untukmu</h2>
+                    
+                    <div class="space-y-6 text-slate-700 leading-relaxed">
+                        <p class="fade-in-up delay-1">
+                            Aku tahu ini mungkin terasa aneh atau tidak terduga. Tapi aku perlu memberitahumu sesuatu yang sudah lama mengganggu pikiranku. Aku melihat kamu. Benar-benar melihat kamu.
+                        </p>
+
+                        <p class="fade-in-up delay-2">
+                            Aku melihat cara kamu tersenyum ketika berpikir tidak ada yang memperhatikan. Aku melihat kebaikan dalam setiap tindakanmu. Aku mendengarkan cerita yang kamu bagikan, bahkan yang kecil sekalipun, dan semuanya penting bagiku.
+                        </p>
+
+                        <p class="fade-in-up delay-3">
+                            Kamu adalah seseorang yang luar biasa. Mungkin kamu tidak menyadarinya, tapi kamu mengubah dunia sekitarmu setiap hari. Senyuman kamu membuat hari menjadi lebih cerah. Kehadiranmu membuat segalanya terasa lebih berarti.
+                        </p>
+
+                        <p class="fade-in-up delay-4">
+                            Aku membuat website ini karena aku ingin kamu tahu bahwa ada seseorang yang benar-benar peduli padamu. Ada seseorang yang menghargai setiap aspek dari dirimu. Ada seseorang yang berharap yang terbaik untuk kamu, selalu.
+                        </p>
+
+                        <p class="fade-in-up" style="animation-delay: 1s;">
+                            Di bawah ini ada beberapa surprises yang sudah aku siapkan. Setiap satu dibuat dengan penuh cinta dan perhatian. Aku harap kamu menikmatinya, dan yang lebih penting... aku harap kamu tahu bahwa kamu sangat dicintai.
+                        </p>
+
+                        <p class="fade-in-up text-center text-sm italic mt-8" style="animation-delay: 1.2s;">
+                            — Someone Who Adores You Silently 💕
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Surprises Section -->
+        <section id="surprises" class="py-20 px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="font-serif text-4xl font-bold text-center text-romantic-500 mb-16 fade-in-up">
+                    Kejutan Untukmu ✨
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 fade-in-up delay-1">
+                    <!-- Surprise 1 -->
+                    <a href="HAI/index.html" class="group">
+                        <div class="glass-effect rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2 h-full cursor-pointer">
+                            <div class="bg-gradient-to-br from-romantic-200 to-romantic-300 h-48 flex items-center justify-center text-7xl group-hover:scale-110 transition duration-300">
+                                💌
+                            </div>
+                            <div class="p-8">
+                                <h3 class="font-serif text-2xl font-bold text-romantic-500 mb-3">Surprise Pertama</h3>
+                                <p class="text-slate-600 mb-6 leading-relaxed">
+                                    Sebuah amplop berisi pesan cinta dengan envelope interaktif yang misterius. Buka untuk menemukan kejutan istimewa dari seseorang yang menyayangimu.
+                                </p>
+                                <div class="text-sm text-romantic-500 font-semibold flex items-center gap-2 group-hover:gap-3 transition">
+                                    Buka Surprise <i class="fa-solid fa-arrow-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Surprise 2 -->
+                    <a href="NVM/index.html" class="group">
+                        <div class="glass-effect rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2 h-full cursor-pointer">
+                            <div class="bg-gradient-to-br from-blue-200 to-blue-300 h-48 flex items-center justify-center text-7xl group-hover:scale-110 transition duration-300">
                                 🎵
                             </div>
-                            <div class="p-6 flex flex-col flex-grow">
-                                <h3 class="font-serif text-2xl font-bold text-blue-600 mb-2">NVM</h3>
-                                <p class="text-slate-600 text-sm mb-4 flex-grow">
-                                    Halaman Happy Birthday dengan musik interaktif, vinyl player, dan pesan istimewa.
+                            <div class="p-8">
+                                <h3 class="font-serif text-2xl font-bold text-blue-600 mb-3">Surprise Kedua</h3>
+                                <p class="text-slate-600 mb-6 leading-relaxed">
+                                    Halaman ulang tahun spesial dengan musik favorit, pesan personal yang menyentuh hati, dan kejutan interaktif yang penuh tawa.
                                 </p>
-                                <div class="flex gap-2 text-xs">
-                                    <span class="bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Music</span>
-                                    <span class="bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Player</span>
+                                <div class="text-sm text-blue-600 font-semibold flex items-center gap-2 group-hover:gap-3 transition">
+                                    Buka Surprise <i class="fa-solid fa-arrow-right"></i>
                                 </div>
-                            </div>
-                            <div class="px-6 pb-4 pt-0">
-                                <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg transition">
-                                    Buka <i class="fa-solid fa-arrow-right ml-2"></i>
-                                </button>
                             </div>
                         </div>
                     </a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Features Section -->
-    <section class="py-20 px-4 bg-white/50">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="text-center">
-                    <div class="inline-block bg-romantic-100 p-4 rounded-full mb-4 text-3xl">
-                        <i class="fa-solid fa-heart text-romantic-500"></i>
-                    </div>
-                    <h3 class="font-serif text-xl font-bold text-slate-800 mb-2">Dibuat dengan Cinta</h3>
-                    <p class="text-slate-600 text-sm">Setiap detail dirancang dengan penuh perhatian dan kasih sayang untuk orang spesial Anda.</p>
-                </div>
-
-                <div class="text-center">
-                    <div class="inline-block bg-romantic-100 p-4 rounded-full mb-4 text-3xl">
-                        <i class="fa-solid fa-wand-magic-sparkles text-romantic-500"></i>
-                    </div>
-                    <h3 class="font-serif text-xl font-bold text-slate-800 mb-2">Interaktif & Engaging</h3>
-                    <p class="text-slate-600 text-sm">Pengalaman interaktif yang membuat momen spesial menjadi lebih berkesan dan tak terlupakan.</p>
-                </div>
-
-                <div class="text-center">
-                    <div class="inline-block bg-romantic-100 p-4 rounded-full mb-4 text-3xl">
-                        <i class="fa-solid fa-smartphone text-romantic-500"></i>
-                    </div>
-                    <h3 class="font-serif text-xl font-bold text-slate-800 mb-2">Responsif & Mobile</h3>
-                    <p class="text-slate-600 text-sm">Akses dari perangkat apapun. Semua proyek dioptimalkan untuk tampilan sempurna di semua ukuran layar.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-20 px-4 relative">
-        <div class="absolute inset-0 bg-gradient-to-r from-romantic-100/30 via-transparent to-romantic-100/30 pointer-events-none"></div>
-        <div class="max-w-4xl mx-auto relative z-10">
-            <div class="text-center mb-12">
-                <h2 class="font-serif text-4xl md:text-5xl font-bold text-slate-800 mb-4">Tentang Koleksi Ini</h2>
-            </div>
-
-            <div class="glass-effect rounded-2xl p-8 md:p-12">
-                <p class="text-slate-700 text-lg leading-relaxed mb-6">
-                    Creative Collection adalah hasil karya khusus yang menggabungkan teknologi web modern dengan sentuhan personal dan emosi. Setiap proyek dalam koleksi ini dirancang untuk menciptakan pengalaman yang berkesan bagi orang-orang terkasih.
+        <!-- Secret Message Section -->
+        <section class="py-20 px-4 bg-romantic-50/40">
+            <div class="max-w-2xl mx-auto text-center fade-in-up">
+                <h2 class="font-serif text-3xl font-bold text-romantic-500 mb-8">Satu Hal Lagi...</h2>
+                <p class="text-lg text-slate-700 leading-relaxed mb-8">
+                    Tidak peduli siapa aku sebenarnya, atau bagaimana kamu merasa tentang semua ini... aku hanya ingin kamu tahu:
                 </p>
-
-                <p class="text-slate-700 text-lg leading-relaxed mb-6">
-                    Menggunakan teknologi seperti HTML5, CSS3, JavaScript, dan Tailwind CSS, kami menciptakan halaman-halaman interaktif yang tidak hanya indah secara visual, tetapi juga penuh dengan fitur-fitur yang menyenangkan seperti animasi, musik, gallery, dan banyak lagi.
+                <p class="font-serif text-2xl text-romantic-500 italic mb-4">
+                    "Kamu layak untuk dicintai sepenuh hati."
                 </p>
+                <p class="text-base text-slate-600 leading-relaxed">
+                    Kamu layak mendapatkan yang terbaik. Kamu layak untuk bahagia. Kamu layak untuk didengarkan, dihargai, dan dicintai oleh seseorang yang benar-benar mengerti keindahan jiwamu.
+                </p>
+            </div>
+        </section>
 
-                <div class="bg-romantic-50 rounded-xl p-6 mt-8">
-                    <h3 class="font-serif text-2xl font-bold text-romantic-500 mb-4">🎯 Fitur Unggulan</h3>
-                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 text-slate-700">
-                        <li class="flex items-center gap-3">
-                            <i class="fa-solid fa-check text-romantic-500"></i>
-                            <span>Envelope 3D Interaktif</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <i class="fa-solid fa-check text-romantic-500"></i>
-                            <span>Audio Player Vinyl</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <i class="fa-solid fa-check text-romantic-500"></i>
-                            <span>Scratch Card Interaktif</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <i class="fa-solid fa-check text-romantic-500"></i>
-                            <span>Countdown Timer</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <i class="fa-solid fa-check text-romantic-500"></i>
-                            <span>Polaroid Gallery</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <i class="fa-solid fa-check text-romantic-500"></i>
-                            <span>Animasi Partikel</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="mt-8 pt-8 border-t border-romantic-100 text-center">
-                    <p class="text-slate-600 text-sm mb-4">
-                        <i class="fa-solid fa-heart text-romantic-500 mr-2"></i>
-                        Dibuat dengan penuh kasih sayang
-                    </p>
+        <!-- Footer -->
+        <footer class="py-16 px-4 border-t border-romantic-100/20">
+            <div class="max-w-2xl mx-auto text-center">
+                <div class="text-4xl mb-6">💕</div>
+                <p class="text-slate-600 mb-4 font-light">
+                    Dari seseorang yang mengagumi keindahanmu...
+                </p>
+                <p class="text-slate-500 text-sm italic">
+                    ✨ Setiap hari adalah hadiah karena kamu ada di dunia ini ✨
+                </p>
+                <div class="mt-8 pt-8 border-t border-romantic-100/30">
                     <p class="text-slate-500 text-xs">
-                        &copy; 2026 Arif. Semua proyek dibuat khusus untuk moment spesial yang tak terlupakan.
+                        Created with <i class="fa-solid fa-heart text-romantic-500"></i> and lots of thinking about you
                     </p>
                 </div>
             </div>
-        </div>
-    </section>
+        </footer>
 
-    <!-- Footer -->
-    <footer class="py-12 px-4 border-t border-romantic-100/30 bg-white/30">
-        <div class="max-w-7xl mx-auto text-center">
-            <div class="flex justify-center gap-6 mb-6">
-                <a href="#" class="text-romantic-500 hover:text-romantic-600 text-2xl transition">
-                    <i class="fa-brands fa-instagram"></i>
-                </a>
-                <a href="#" class="text-romantic-500 hover:text-romantic-600 text-2xl transition">
-                    <i class="fa-brands fa-twitter"></i>
-                </a>
-                <a href="#" class="text-romantic-500 hover:text-romantic-600 text-2xl transition">
-                    <i class="fa-brands fa-github"></i>
-                </a>
-            </div>
-            <p class="text-slate-600 text-sm">
-                Made with <i class="fa-solid fa-heart text-romantic-500"></i> by Arif | 2026
-            </p>
-        </div>
-    </footer>
+    </div>
 
     <script>
-        // Smooth scroll behavior
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -330,10 +292,10 @@
             });
         });
 
-        // Add scroll animation for elements
+        // Intersection Observer untuk fade-in effect
         const observerOptions = {
             threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
+            rootMargin: '0px 0px -50px 0px'
         };
 
         const observer = new IntersectionObserver(function(entries) {
@@ -345,11 +307,8 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-            observer.observe(card);
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            observer.observe(el);
         });
     </script>
 </body>
