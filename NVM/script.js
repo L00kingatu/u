@@ -14,15 +14,6 @@ const shapes = ['heart', 'sparkle', 'circle'];
 // Audio Elements
 let audio, vinyl, playIcon, progressBar, currentTimeEl, totalTimeEl;
 
-// Playlist Configuration
-const playlist = [
-    { title: 'Rearrange the World', file: 'song1.mp3' },
-    { title: 'Keep Me', file: 'song2.mp3' },
-    { title: 'Kasih Putih', file: 'song3.mp3' }
-];
-
-let currentSongIndex = 0;
-
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Initialize variables
     audio = document.getElementById('birthday-track');
@@ -43,14 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
         audio.addEventListener('loadedmetadata', () => {
             if (totalTimeEl) totalTimeEl.innerText = formatTime(audio.duration);
         });
-        audio.addEventListener('ended', playNextSong);
         // In case audio is already pre-loaded
         if (audio.duration && totalTimeEl) {
             totalTimeEl.innerText = formatTime(audio.duration);
         }
-        
-        // Load first song
-        loadSong(currentSongIndex);
     }
 
     // 3. Date check logic
@@ -76,43 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
         startCountdown();
     }
 });
-
-// Countdown Timer Loop
-let countdownInterval;
-function startCountdown() {
-    const daysEl = document.getElementById('days');
-    const hoursEl = document.getElementById('hours');
-    const minutesEl = document.getElementById('minutes');
-    const secondsEl = document.getElementById('seconds');
-
-    function update() {
-        const now = new Date();
-        const difference = TARGET_DATE - now;
-
-        // If target date is reached!
-        if (difference <= 0) {
-            clearInterval(countdownInterval);
-            const lockScreen = document.getElementById('lock-screen');
-            const cover = document.getElementById('cover');
-            if (lockScreen) lockScreen.classList.add('hidden');
-            if (cover) cover.classList.remove('hidden');
-            return;
-        }
-
-        const d = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const s = Math.floor((difference % (1000 * 60)) / 1000);
-
-        if (daysEl) daysEl.innerText = d < 10 ? '0' + d : d;
-        if (hoursEl) hoursEl.innerText = h < 10 ? '0' + h : h;
-        if (minutesEl) minutesEl.innerText = m < 10 ? '0' + m : m;
-        if (secondsEl) secondsEl.innerText = s < 10 ? '0' + s : s;
-    }
-
-    update();
-    countdownInterval = setInterval(update, 1000);
-};
 
 // Countdown Timer Loop
 let countdownInterval;
@@ -214,7 +164,7 @@ function startTypingEffect() {
                 textEl.innerHTML += char;
             }
             charIndex++;
-            setTimeout(type, 50);
+            setTimeout(type, 35);
         }
     }
     type();
@@ -430,40 +380,4 @@ function formatTime(seconds) {
     const m = Math.floor(seconds / 60);
     const s = Math.floor(seconds % 60);
     return `${m}:${s < 10 ? '0' : ''}${s}`;
-}
-
-// ==========================================
-// PLAYLIST SYSTEM
-// ==========================================
-function loadSong(index) {
-    if (index < 0 || index >= playlist.length) return;
-    
-    currentSongIndex = index;
-    const song = playlist[index];
-    
-    // Update audio source
-    const source = audio.querySelector('source');
-    source.src = song.file;
-    audio.load();
-}
-
-function playNextSong() {
-    currentSongIndex++;
-    
-    if (currentSongIndex >= playlist.length) {
-        // Loop back to first song
-        currentSongIndex = 0;
-    }
-    
-    loadSong(currentSongIndex);
-    audio.play().catch(err => {
-        console.log("Auto-play next song failed: ", err);
-    });
-}
-
-function skipToSong(index) {
-    loadSong(index);
-    if (!audio.paused) {
-        audio.play();
-    }
 }
