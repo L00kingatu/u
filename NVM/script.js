@@ -3,7 +3,7 @@
 // ==========================================
 // Format: YYYY-MM-DDTHH:mm:ss
 // Contoh: "2026-10-15T00:00:00" -> 15 Oktober 2026 jam 12 malam
-const TARGET_DATE = new Date("2026-06-26T00:00:00");
+const TARGET_DATE = new Date("2026-10-15T00:00:00");
 
 // Variables for Canvas Particle System
 let canvas, ctx;
@@ -112,7 +112,7 @@ function startCountdown() {
 
     update();
     countdownInterval = setInterval(update, 1000);
-});
+};
 
 // Countdown Timer Loop
 let countdownInterval;
